@@ -1,0 +1,182 @@
+/* Reset default styles */
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('../images/background/1.png'); /* 默认背景图片 */
+    background-size: cover; /* 背景图自适应大小，覆盖整个页面 */
+    background-position: center; /* 背景图居中 */
+    background-repeat: no-repeat; /* 禁止背景图重复 */
+    transition: background-image 1s ease-in-out; /* 平滑过渡效果 */
+}
+/*导航栏*/
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.2); /* 半透明的背景色 */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 半透明的边框 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 增加阴影效果 */
+}
+/*导航栏 logo*/
+.navbar img {
+    height: 50px; /* 限制logo图片大小 */
+}
+
+/*导航栏 超链接*/
+.navbar a {
+    text-decoration: none;
+    color: #007bff;
+    margin: 0 15px;
+    font-size: 16px;
+}
+
+.navbar .upload-link {
+    margin-left: 250px; /* 调整“上传视频”导航项距离左边的距离 */
+}
+
+/*导航栏 用户信息*/
+.navbar .user-info {
+    display: flex;
+    align-items: center;
+
+}
+/*导航栏 用户头像*/
+.navbar .user-info img {
+    width: 50px; /* 用户头像大小 */
+    height: 50px;
+    border-radius: 50%; /* 圆形头像 */
+    margin-right: 10px;
+}
+
+.navbar .user-info button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.navbar .user-info button:hover {
+    background-color: #0056b3;
+}
+
+.navbar .background-switcher {
+    margin-left: 20px; /* 为“切换背景”项增加一些间距 */
+    cursor: pointer;
+}
+
+.navbar .userinfo-button {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+    background-color: #007bff; /* 注册按钮的背景颜色 */
+    color: white; /* 注册按钮的文字颜色 */
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.navbar .userinfo-button:hover {
+    background-color: #0056b3; /* 注册按钮的悬停背景颜色 */
+}
+
+.content {
+    padding: 20px;
+    text-align: center;
+}
+.system{
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+}
+
+.system .box{
+    width: 200px;
+    height: 370px;
+    display: flex;
+    align-items: center;
+    flex-direction:row;
+    justify-content: space-between;
+    padding: 10px 20px 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.system .videobox{
+    width: 200px;
+    height: 164.5px;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+    justify-content: space-between;
+    padding: 10px 20px 10px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+}
+.system .videobox img{
+    height: 124.5px;
+    width: 200px;
+}
+
+/* 适用于屏幕宽度小于768px（移动端） */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar img {
+        height: 40px;
+    }
+
+    .navbar .upload-link {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .navbar .user-info {
+        margin-top: 10px;
+    }
+
+    .system {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .system .videobox {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .system .videobox img {
+        width: 100%;
+        height: auto;
+    }
+
+    .system .box {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+}

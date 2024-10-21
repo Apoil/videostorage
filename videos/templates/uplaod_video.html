@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Video</title>
+    <style>
+        /* 现有样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .upload-form-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form p {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        /* 新增进度条样式 */
+        .progress-container {
+            width: 100%;
+            background: #f3f3f3;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: none; /* 默认隐藏 */
+        }
+        .progress-bar {
+            height: 20px;
+            width: 0;
+            background: #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-form-container">
+        <h2>上传视频</h2>
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">上传</button>
+        </form>
+        <!-- 进度条 -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').onsubmit = function(event) {
+            event.preventDefault(); // 阻止表单提交
+
+            const formData = new FormData(this);
+            const xhr = new XMLHttpRequest();
+
+            // 显示进度条
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            progressContainer.style.display = 'block';
+
+            // 上传进度
+            xhr.upload.onprogress = function(event) {
+                if (event.lengthComputable) {
+                    const percentComplete = (event.loaded / event.total) * 100;
+                    progressBar.style.width = percentComplete + '%';
+                    progressBar.innerText = Math.floor(percentComplete) + '%';
+                }
+            };
+
+            // 请求完成
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // 上传成功后可以跳转或显示成功消息
+                    window.location.href = "{% url 'home' %}"; // 替换为你的重定向地址
+                } else {
+                    alert('上传失败，请重试！');
+                }
+            };
+
+            // 发送请求
+            xhr.open('POST', this.action, true);
+            xhr.send(formData);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.12/plyr.polyfilled.js"></script>
+    <title>播放视频</title>
+</head>
+<body>
+    <div class="video-container">
+        <video id="player" controls width="100%" preload="auto">
+            <source src="{% url 'stream_video' video_id=video.id %}" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+    </div>
+    <h1>{{ video.title }}</h1>
+    <p>{{ video.description }}</p>
+    <script>
+        const player = new Plyr('#player', { captions: { active: true } });
+    </script>
+</body>
+</html>

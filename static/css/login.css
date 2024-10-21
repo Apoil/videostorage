@@ -1,0 +1,118 @@
+/* 确保 HTML 和 body 元素的高度为 100% */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 背景图片的动画 */
+@keyframes changeBackground {
+    0% {
+        background-image: url('/static/images/background/6.jpg');
+    }
+    33% {
+        background-image: url('/static/images/background/6.jpg');
+    }
+    66% {
+        background-image: url('/static/images/background/6.jpg');
+    }
+    100% {
+        background-image: url('/static/images/background/6.jpg');
+    }
+}
+
+body {
+    background-size: cover;
+    background-attachment: fixed;
+    animation: changeBackground 35s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 登录容器样式 */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 登录表单样式 */
+.login-form {
+    background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* 设置最大宽度 */
+    text-align: left; /* 文字左对齐 */
+}
+
+/* 表单内部元素 */
+.form-group {
+    margin-bottom: 15px; /* 增加段落上下的间距 */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* 按钮之间的水平距离 */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.register-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #007bff; /* 注册按钮的背景颜色 */
+    color: white; /* 注册按钮的文字颜色 */
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.register-button:hover {
+    background-color: #0056b3; /* 注册按钮的悬停背景颜色 */
+}
+
+/*头像*/
+.avatar-container {
+    text-align: center;
+    margin-bottom: 10px; /* 头像与用户名输入框之间的间距 */
+}
+
+.avatar {
+    width: 100px; /* 头像的宽度 */
+    height: 100px; /* 头像的高度 */
+    border-radius: 50%; /* 使头像变为圆形 */
+    object-fit: cover; /* 确保头像图片不会变形 */
+    display: block;
+    margin: 0 auto; /* 使头像居中 */
+}

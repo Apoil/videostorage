@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录页面</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>登录</h2>
+        <form class="login-form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="avatar-container">
+                    <img src="{% static 'images/avatar.png' %}" alt="头像" class="avatar">
+                </div>
+                <label for="id_username">用户名</label>
+                <input type="text" name="username" id="id_username" class="form-control" placeholder="用户名">
+            </div>
+            <div class="form-group">
+                <label for="id_password">密码</label>
+                <input type="password" name="password" id="id_password" class="form-control" placeholder="密码">
+            </div>
+            <div class="button-group">
+                <button type="submit">登 录</button>
+                <a href="{% url 'signup' %}" class="register-button">注 册</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

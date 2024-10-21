@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传成功</title>
+</head>
+<body>
+    <h2>上传成功</h2>
+    <p>视频上传成功！</p>
+    <video width="600" controls>
+        <source src="{{ uploaded_file_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <p><a href="{% url 'upload_video' %}">返回上传页面</a></p>
+</body>
+</html>

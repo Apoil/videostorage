@@ -1,0 +1,70 @@
+/* 确保 HTML 和 body 元素的高度为 100% */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 背景图片的动画 */
+@keyframes changeBackground {
+    0% {
+        background-image: url('/static/images/background/1.png');
+    }
+    33% {
+        background-image: url('/static/images/background/2.png');
+    }
+    66% {
+        background-image: url('/static/images/background/3.png');
+    }
+    100% {
+        background-image: url('/static/images/background/4.png');
+    }
+}
+
+body {
+    background-size: cover;
+    background-attachment: fixed;
+    animation: changeBackground 15s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 表单容器样式 */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* 表单样式 */
+.signup-form {
+    background: rgba(255, 255, 255, 0.9); /* 半透明背景 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px; /* 设置最大宽度 */
+    text-align: left; /* 文字左对齐 */
+}
+
+/* 表单内部元素 */
+.signup-form p {
+    margin: 10px 0; /* 增加段落上下的间距 */
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

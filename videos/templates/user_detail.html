@@ -1,0 +1,80 @@
+<!-- templates/user_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户详情</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .h1text{
+            text-align: center; 
+        }
+        .field {
+            margin-bottom: 10px;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .avatar-container {
+            text-align: center; /* 居中对齐头像容器 */
+        }
+        .avatar {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%; /* 使头像成为圆形，可以移除或修改为0使其保持正方形 */
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff; /* 按钮的背景颜色 */
+            color: white; /* 按钮的文字颜色 */
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3; /* 按钮的悬停背景颜色 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="h1text">用户详情</h1>
+        {% if user.userprofile.avatar %}
+        <div class="avatar-container">
+            <img src="{{ user_profile.avatar.url }}" alt="用户头像" class="avatar">
+        </div>
+        {% else %}
+            <p>无头像</p>
+        {% endif %}
+        <a href="{% url 'upload_avatar' %}">修改头像</a>
+        <div class="field">
+            <span class="label">用户名:</span> {{ user.username }}
+        </div>
+        <div class="field">
+            <span class="label">邮箱:</span> {{ user.email }}
+        </div>
+        <div class="field">
+            <span class="label">日期加入:</span> {{ user.date_joined }}
+        </div>
+        <div>
+            <a href="{% url 'home' %}" class="back-button">返回主页</a>
+        </div>
+    </div>
+</body>
+</html>

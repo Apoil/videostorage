@@ -1,0 +1,21 @@
+<!-- video_list.html -->  
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>视频列表</title>  
+</head>  
+<body>  
+    <div>  
+        {% for video in videos %}  
+            <div class="media-container">  
+                <a href="{% url 'play_video' video_id=video.id %}">  
+                    <img src="{{ video.cover.url }}" alt="{{ video.title }}">  
+                </a>  
+                <h2>{{ video.title }}</h2>  
+            </div>  
+        {% endfor %}  
+    </div>  
+</body>  
+</html>

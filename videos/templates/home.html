@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>主页</title>
+    {% load static %}
+    {% load custom_filters %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+</head>
+<body>
+    <script>
+           
+            document.addEventListener('DOMContentLoaded', function() {
+            // 背景图片数组
+            const backgrounds = [
+                '{% static "images/background/1.jpg" %}',
+                '{% static "images/background/2.jpg" %}',
+                '{% static "images/background/3.jpg" %}',
+                '{% static "images/background/4.jpg" %}',
+                '{% static "images/background/5.jpg" %}',
+                '{% static "images/background/6.jpg" %}'
+            ];
+
+            let currentIndex = 0;
+
+            function changeBackground() {
+                currentIndex = (currentIndex + 1) % backgrounds.length;
+                document.body.style.backgroundImage = `url(${backgrounds[currentIndex]})`;
+                document.body.style.backgroundSize = 'cover'; // 确保背景图自适应大小，覆盖整个页面
+                document.body.style.backgroundPosition = 'center'; // 背景图居中
+                document.body.style.backgroundRepeat = 'no-repeat'; // 禁止背景图重复
+            }
+
+
+            // 初次加载时设置背景图片
+            changeBackground();
+
+            // 每分钟切换一次背景图片
+            setInterval(changeBackground, 60000);
+
+            // 为“切换背景”按钮添加点击事件监听器
+            document.getElementById('background-switcher').addEventListener('click', function(event) {
+                event.preventDefault(); // 阻止默认的链接行为
+                changeBackground();
+            });
+        });
+        
+
+    </script>
+
+
+    <div class="navbar">
+        <img src="{% static 'logo-nobk.png' %}" alt="Logo">
+        <div class="upload-link">
+            <a href="{% url 'upload_video' %}">上传视频</a>
+            <a href="#" id="background-switcher" class="background-switcher">切换背景</a>
+        </div>
+        <div class="user-info">
+            {% if user.is_authenticated %}
+
+                {% if user.userprofile.avatar %}
+                    <img src="{{ user_profile.avatar.url }}" alt="用户头像" class="Avatar">
+                {% else %}
+                    <img src="{% static 'images/avatar.png' %}" alt="Default Avatar">
+                {% endif %}
+
+                
+                当前登录用户: {{ user.username }}
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="logout">登出</button>
+                </form>
+                <a href="{% url 'user_detail' user_id=request.user.id %}" class="user-info">个人信息</a>
+            {% else %}
+                <a href="{% url 'login' %}">登录</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="content">
+        <h2>欢迎来到视频储存站</h2>
+    </div>
+
+    <div class="system">
+
+        <div class="rightbox">
+            <div class="box" id="box" style="float: right;">
+                
+            </div>
+            
+        </div>
+
+        
+
+    {% for video in videos %}
+        {% if video.user.id == request.user.id %}
+            <div style="float: left;">
+                <div class="videobox"> 
+                    <div> 
+                        <a href="{% url 'play_video' video_id=video.id %}">  
+                            <img src="{{ video.cover.url }}" alt="{{ video.title }}">  
+                        </a> 
+                        <h6 style="margin: 0 0 0 0;">{{ video.title }}</h6>
+                    </div> 
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+    
+
+    </div>
+
+
+    <script>
+        
+        var data = [
+            { value: '{{ disk_info.used }}', name: '已使用' },
+            { value: '{{ disk_info.free }}', name: '空余' }
+        ];
+        
+        var dom = document.getElementById('box');
+        var myChart = echarts.init(dom, null, {
+            renderer: 'canvas',
+            useDirtyRect: false
+        });
+
+        var option = {
+            tooltip: {
+                trigger: 'item'
+            },
+            legend: {
+                top: '5%',
+                left: 'center'
+            },
+            series: [
+                {
+                    name: '容量监控',
+                    type: 'pie',
+                    radius: ['40%', '70%'],
+                    avoidLabelOverlap: false,
+                    itemStyle: {
+                        borderRadius: 10,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '20',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: data
+                }
+            ]
+        };
+        
+        myChart.setOption(option);
+        window.addEventListener('resize', myChart.resize);
+    </script>
+  
+
+    
+</body>
+</html>
